@@ -6,8 +6,9 @@ class User < ApplicationRecord
 
   has_many  :books
   has_one_attached :profile_image
-
+# バリデーション
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
+  validates :introduction, length: { maximum: 50 }
 
   
   
