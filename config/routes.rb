@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
     resources :book_comments, only: [:create,:destroy]
+    # それ自身のidが分からなくても、関連する他のモデルのidから特定できるから「resource」(id が表示されない)
+    resource :favorites, only: [:create,:destroy]
   end
   
   devise_for :users
