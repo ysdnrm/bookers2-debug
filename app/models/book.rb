@@ -5,12 +5,12 @@ class Book < ApplicationRecord
   # バリデーション
   validates :title,presence:true
   validates :body,presence:true,length:{maximum:200}
-  
+
   # いいね機能でのユーザーの存在
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
-  
+
 # 検索方法分岐
   def self.looks(search, word)
     if search == "perfect_match"
@@ -25,5 +25,5 @@ class Book < ApplicationRecord
       @book = Book.all
     end
   end
-  
+
 end

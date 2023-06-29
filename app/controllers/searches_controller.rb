@@ -11,7 +11,7 @@ class SearchesController < ApplicationController
     else
       @books = Book.looks(params[:search], params[:word])
     end
-    @keyword = params[:keyword]
+    @word = params[:word]
   end
 
 end
