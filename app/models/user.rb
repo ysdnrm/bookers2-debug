@@ -8,11 +8,10 @@ class User < ApplicationRecord
   has_many :books
   has_many :book_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
- 
   # グループ機能
   has_many :groups, through: :group_users
-  has_many :group_users
-  
+  has_many :group_users, dependent: :destroy
+
   # フォローをした、されたの関係
   # 自分がフォローする（与フォロー）側の関係性
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
@@ -24,7 +23,7 @@ class User < ApplicationRecord
   has_many :followings, through: :relationships, source: :followed
   # 被フォロー関係を通じて参照→自分をフォローしている人
   has_many :followers, through: :reverse_of_relationships, source: :follower
-  
+
   # メソッドを記述(これで、コントローラーをすっきり)
   # フォローしたときの処理
   def follow(user_id)
@@ -46,7 +45,7 @@ class User < ApplicationRecord
   def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end
-  
+
   # 検索方法分岐
     # searchアクションで使用する、searcheとwordの引数を受け取るlooksメソッドをモデルに作成
   def self.looks(search, word)
@@ -62,5 +61,5 @@ class User < ApplicationRecord
       @user = User.all
     end
   end
-  
+
 end
