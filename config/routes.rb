@@ -22,7 +22,10 @@ Rails.application.routes.draw do
 
   end
   # destroy以外のアクション許可
-  resources :groups, except: [:destroy]
+  resources :groups do
+    resource :group_users, only: [:create, :destroy]
+    
+  end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 

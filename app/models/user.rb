@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :book_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   # グループ機能
-  has_many :groups, through: :group_users
+  # has_many :groups, through: :group_users
   has_many :group_users, dependent: :destroy
 
   # フォローをした、されたの関係
